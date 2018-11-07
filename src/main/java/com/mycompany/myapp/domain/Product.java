@@ -57,7 +57,8 @@ public class Product implements Serializable {
     @JsonIgnoreProperties("products")
     private ProductCategory productCategory;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
+    // remove
     public Long getId() {
         return id;
     }
@@ -156,7 +157,8 @@ public class Product implements Serializable {
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -180,14 +182,8 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", price=" + getPrice() +
-            ", size='" + getSize() + "'" +
-            ", image='" + getImage() + "'" +
-            ", imageContentType='" + getImageContentType() + "'" +
-            "}";
+        return "Product{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription() + "'"
+                + ", price=" + getPrice() + ", size='" + getSize() + "'" + ", image='" + getImage() + "'"
+                + ", imageContentType='" + getImageContentType() + "'" + "}";
     }
 }
