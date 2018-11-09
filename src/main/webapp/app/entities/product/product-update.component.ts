@@ -63,7 +63,16 @@ export class ProductUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        var flag = false;
         if (this.product.id !== undefined) {
+            this.productcategories.forEach(element => {
+                if (element.id == this.product.productCategory.id) {
+                    flag = true;
+                }
+            });
+            if (flag == false) {
+                this.subscribeToSaveResponse(this.productCategoryService.create(this.product.productCategory));
+            }
             this.subscribeToSaveResponse(this.productService.update(this.product));
         } else {
             this.subscribeToSaveResponse(this.productService.create(this.product));
