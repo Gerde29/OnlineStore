@@ -28,7 +28,7 @@ public class ProductService {
 
     private ProductRepository productRepository;
 
-    ProductCategoryRepository productCategoryRepository;
+    private ProductCategoryRepository productCategoryRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -50,7 +50,7 @@ public class ProductService {
 
         for (ProductCategory var : listProductCategory) {
 
-            if (productCategory.getId() == var.getId()) {
+            if (product.getCategory() == var.getName()) {
 
                 flag = true;
                 break;
@@ -58,6 +58,9 @@ public class ProductService {
             }
         }
         if (flag == false) {
+            productCategory = new ProductCategory();
+            productCategory.setName(product.getCategory());
+            productCategory.addProduct(product);
             productCategoryService.save(productCategory);
         }
 

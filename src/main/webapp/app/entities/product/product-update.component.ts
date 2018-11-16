@@ -6,7 +6,7 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IProduct } from 'app/shared/model/product.model';
 import { ProductService } from './product.service';
-import { IProductCategory } from 'app/shared/model/product-category.model';
+import { IProductCategory, ProductCategory } from 'app/shared/model/product-category.model';
 import { ProductCategoryService } from 'app/entities/product-category';
 
 @Component({
@@ -15,9 +15,12 @@ import { ProductCategoryService } from 'app/entities/product-category';
 })
 export class ProductUpdateComponent implements OnInit {
     product: IProduct;
+    products: IProduct[];
     isSaving: boolean;
-
+    flag: boolean;
     productcategories: IProductCategory[];
+    productcategory: IProductCategory;
+    prodcat: IProductCategory;
 
     constructor(
         private dataUtils: JhiDataUtils,
@@ -63,15 +66,19 @@ export class ProductUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        var flag = false;
+        this.flag = false;
         if (this.product.id !== undefined) {
             this.productcategories.forEach(element => {
-                if (element.id == this.product.productCategory.id) {
-                    flag = true;
+                if (element.name == this.product.category) {
+                    this.flag = true;
+                    this.productcategory = element;
                 }
+                this.prodcat = element;
             });
-            if (flag == false) {
-                this.subscribeToSaveResponse(this.productCategoryService.create(this.product.productCategory));
+            if (this.flag == false) {
+                this.products.push(this.product);
+                this.productcategory = new ProductCategory(this.prodcat.id++, this.product.category, null, this.products);
+                this.subscribeToSaveResponse(this.productCategoryService.create(this.productcategory));
             }
             this.subscribeToSaveResponse(this.productService.update(this.product));
         } else {

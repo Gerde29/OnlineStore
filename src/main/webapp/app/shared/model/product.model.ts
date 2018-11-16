@@ -16,6 +16,7 @@ export interface IProduct {
     size?: Size;
     imageContentType?: string;
     image?: any;
+    category?: string;
     productCategory?: IProductCategory;
 }
 

@@ -53,6 +53,9 @@ public class Product implements Serializable {
     @Column(name = "image_content_type")
     private String imageContentType;
 
+    @NotNull
+    private String category; 
+
     @ManyToOne
     @JsonIgnoreProperties("products")
     private ProductCategory productCategory;
@@ -143,6 +146,14 @@ public class Product implements Serializable {
 
     public void setImageContentType(String imageContentType) {
         this.imageContentType = imageContentType;
+    }
+
+    public String getCategory(){
+        return category;
+    }
+
+    public void setCategory(String category){
+        this.category = category;
     }
 
     public ProductCategory getProductCategory() {
