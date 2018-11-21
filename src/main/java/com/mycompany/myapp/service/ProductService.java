@@ -1,21 +1,16 @@
 package com.mycompany.myapp.service;
 
-import java.util.*;
-
 import com.mycompany.myapp.domain.Product;
-import com.mycompany.myapp.domain.ProductCategory;
-import com.mycompany.myapp.repository.ProductCategoryRepository;
 import com.mycompany.myapp.repository.ProductRepository;
-import com.mycompany.myapp.web.rest.ProductCategoryResource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import antlr.collections.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing Product.
@@ -27,8 +22,6 @@ public class ProductService {
     private final Logger log = LoggerFactory.getLogger(ProductService.class);
 
     private ProductRepository productRepository;
-
-    private ProductCategoryRepository productCategoryRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -42,28 +35,6 @@ public class ProductService {
      */
     public Product save(Product product) {
         log.debug("Request to save Product : {}", product);
-        boolean flag = false;
-        ProductCategory productCategory = product.getProductCategory();
-        ProductCategoryService productCategoryService = new ProductCategoryService(productCategoryRepository);
-        ProductCategoryResource productCategoryResource = new ProductCategoryResource(productCategoryService);
-        java.util.List<ProductCategory> listProductCategory = productCategoryResource.getAllProductCategories();
-
-        for (ProductCategory var : listProductCategory) {
-
-            if (product.getCategory() == var.getName()) {
-
-                flag = true;
-                break;
-
-            }
-        }
-        if (flag == false) {
-            productCategory = new ProductCategory();
-            productCategory.setName(product.getCategory());
-            productCategory.addProduct(product);
-            productCategoryService.save(productCategory);
-        }
-
         return productRepository.save(product);
     }
 
@@ -78,6 +49,7 @@ public class ProductService {
         log.debug("Request to get all Products");
         return productRepository.findAll(pageable);
     }
+
 
     /**
      * Get one product by id.

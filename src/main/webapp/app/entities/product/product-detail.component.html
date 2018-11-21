@@ -30,6 +30,10 @@
                         {{product.imageContentType}}, {{byteSize(product.image)}}
                     </div>
                 </dd>
+                <dt><span jhiTranslate="onlineStoreApp.product.category">Category</span></dt>
+                <dd>
+                    <span>{{product.category}}</span>
+                </dd>
                 <dt><span jhiTranslate="onlineStoreApp.product.productCategory">Product Category</span></dt>
                 <dd>
                     <div *ngIf="product.productCategory">

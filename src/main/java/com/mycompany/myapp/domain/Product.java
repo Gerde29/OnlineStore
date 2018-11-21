@@ -53,15 +53,14 @@ public class Product implements Serializable {
     @Column(name = "image_content_type")
     private String imageContentType;
 
-    @NotNull
-    private String category; 
+    @Column(name = "category")
+    private String category;
 
     @ManyToOne
-    @JsonIgnoreProperties("products")
+    @JsonIgnoreProperties("")
     private ProductCategory productCategory;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
-    // remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -148,11 +147,16 @@ public class Product implements Serializable {
         this.imageContentType = imageContentType;
     }
 
-    public String getCategory(){
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category){
+    public Product category(String category) {
+        this.category = category;
+        return this;
+    }
+
+    public void setCategory(String category) {
         this.category = category;
     }
 
@@ -168,8 +172,7 @@ public class Product implements Serializable {
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-    // setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -193,8 +196,15 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription() + "'"
-                + ", price=" + getPrice() + ", size='" + getSize() + "'" + ", image='" + getImage() + "'"
-                + ", imageContentType='" + getImageContentType() + "'" + "}";
+        return "Product{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", price=" + getPrice() +
+            ", size='" + getSize() + "'" +
+            ", image='" + getImage() + "'" +
+            ", imageContentType='" + getImageContentType() + "'" +
+            ", category='" + getCategory() + "'" +
+            "}";
     }
 }

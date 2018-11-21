@@ -60,6 +60,9 @@ public class ProductResourceIntTest {
     private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
+    private static final String DEFAULT_CATEGORY = "AAAAAAAAAA";
+    private static final String UPDATED_CATEGORY = "BBBBBBBBBB";
+
     @Autowired
     private ProductRepository productRepository;
     
@@ -106,7 +109,8 @@ public class ProductResourceIntTest {
             .price(DEFAULT_PRICE)
             .size(DEFAULT_SIZE)
             .image(DEFAULT_IMAGE)
-            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
+            .category(DEFAULT_CATEGORY);
         return product;
     }
 
@@ -136,6 +140,7 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getSize()).isEqualTo(DEFAULT_SIZE);
         assertThat(testProduct.getImage()).isEqualTo(DEFAULT_IMAGE);
         assertThat(testProduct.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
+        assertThat(testProduct.getCategory()).isEqualTo(DEFAULT_CATEGORY);
     }
 
     @Test
@@ -227,7 +232,8 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE.toString())))
             .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
+            .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())));
     }
     
     @Test
@@ -246,7 +252,8 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.intValue()))
             .andExpect(jsonPath("$.size").value(DEFAULT_SIZE.toString()))
             .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
-            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
+            .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()));
     }
 
     @Test
@@ -275,7 +282,8 @@ public class ProductResourceIntTest {
             .price(UPDATED_PRICE)
             .size(UPDATED_SIZE)
             .image(UPDATED_IMAGE)
-            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .category(UPDATED_CATEGORY);
 
         restProductMockMvc.perform(put("/api/products")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -292,6 +300,7 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getSize()).isEqualTo(UPDATED_SIZE);
         assertThat(testProduct.getImage()).isEqualTo(UPDATED_IMAGE);
         assertThat(testProduct.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
+        assertThat(testProduct.getCategory()).isEqualTo(UPDATED_CATEGORY);
     }
 
     @Test

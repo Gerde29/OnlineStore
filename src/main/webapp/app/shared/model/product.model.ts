@@ -29,6 +29,7 @@ export class Product implements IProduct {
         public size?: Size,
         public imageContentType?: string,
         public image?: any,
+        public category?: string,
         public productCategory?: IProductCategory
     ) {}
 }

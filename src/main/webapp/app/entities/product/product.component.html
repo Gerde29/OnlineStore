@@ -20,6 +20,7 @@
             <th jhiSortBy="price"><span jhiTranslate="onlineStoreApp.product.price">Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="size"><span jhiTranslate="onlineStoreApp.product.size">Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="image"><span jhiTranslate="onlineStoreApp.product.image">Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="category"><span jhiTranslate="onlineStoreApp.product.category">Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="productCategory.name"><span jhiTranslate="onlineStoreApp.product.productCategory">Product Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -37,6 +38,7 @@
                     </a>
                     <span *ngIf="product.image">{{product.imageContentType}}, {{byteSize(product.image)}}</span>
                 </td>
+                <td>{{product.category}}</td>
                 <td>
                     <div *ngIf="product.productCategory">
                         <a [routerLink]="['../product-category', product.productCategory?.id, 'view' ]" >{{product.productCategory?.name}}</a>

@@ -33,6 +33,10 @@
             "fieldName": "image",
             "fieldType": "byte[]",
             "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "category",
+            "fieldType": "String"
         }
     ],
     "relationships": [

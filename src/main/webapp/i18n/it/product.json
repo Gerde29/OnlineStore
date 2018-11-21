@@ -21,6 +21,7 @@
             "price": "Price",
             "size": "Size",
             "image": "Image",
+            "category": "Category",
             "productCategory": "Product Category"
         }
     }
